@@ -10,7 +10,7 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
-// import { AuthProvider } from "@/api/contexts/authContext/index";
+import { AuthProvider } from "@/api/contexts/authContext/index";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -31,22 +31,14 @@ export default function RootLayout() {
     return null;
   }
 
-  // return (
-  //   <AuthProvider>
-  //     <GluestackUIProvider mode="light"><ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-  //         <Stack>
-  //           <Stack.Screen name="+not-found" />
-  //         </Stack>
-  //         <StatusBar style="auto" />
-  //     </ThemeProvider></GluestackUIProvider>
-  //   </AuthProvider>
-  // );
   return (
+    <AuthProvider>
       <GluestackUIProvider mode="light"><ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
           <Stack>
             <Stack.Screen name="+not-found" />
           </Stack>
           <StatusBar style="auto" />
       </ThemeProvider></GluestackUIProvider>
+    </AuthProvider>
   );
 }
