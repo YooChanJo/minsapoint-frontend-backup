@@ -1,3 +1,4 @@
+const path = require("path");
 const { withNativeWind } = require("nativewind/metro");
 const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config");
 
@@ -7,7 +8,15 @@ const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config");
  *
  * @type {import('@react-native/metro-config').MetroConfig}
  */
-const config = mergeConfig(getDefaultConfig(__dirname), {});
+
+/* Resolving for shimmed react dom */
+const config = mergeConfig(getDefaultConfig(__dirname), {
+  resolver: {
+    extraNodeModules: {
+      "react-dom": path.resolve(__dirname, "shims/react-dom.js"),
+    },
+  },
+});
 
 module.exports = withNativeWind(config, {
   input: "./global.css",
