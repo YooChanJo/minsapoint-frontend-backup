@@ -1,16 +1,15 @@
 import { useState } from "react";
 // import "./android";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
-import { Button, StyleSheet, Text, useColorScheme, View } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 
+/* Dark mode needs further studying */
 function App() {
-  const isDarkMode = useColorScheme() === "dark";
-  isDarkMode;
   const [displayText, setDisplayText] = useState("");
   const [flag, setFlag] = useState(false);
 
   return (
-    <GluestackUIProvider mode="light">
+    <GluestackUIProvider>
       <View style={styles.container}>
         <Button
           title="any button"
