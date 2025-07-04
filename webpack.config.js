@@ -9,6 +9,7 @@ const { presets } = require(`${appDirectory}/babel.config.js`);
 const compileNodeModules = [
   // Add every react-native package that needs compiling
   "@gluestack-ui",
+  "@react-navigation",
   "react-native-css-interop",
 ].map(moduleName => path.resolve(appDirectory, `node_modules/${moduleName}`));
 
@@ -18,8 +19,7 @@ const babelLoaderConfiguration = {
   include: [
     path.resolve(appDirectory, "index.web.js"), // Entry to your application
     path.resolve(appDirectory, "App.tsx"), // Change this to your main App file --> .web.ts files are prioritized
-    path.resolve(appDirectory, "components"), // gluestack components
-    // path.resolve(appDirectory, 'src'),
+    path.resolve(appDirectory, 'src'), // all src elements are prebuild
     ...compileNodeModules,
   ],
   use: {

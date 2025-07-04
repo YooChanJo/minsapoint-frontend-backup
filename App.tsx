@@ -1,41 +1,36 @@
-import { useState } from "react";
-// import "./android";
-import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { GluestackUIProvider } from "@/src/components/ui/gluestack-ui-provider";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SplashScreen from "./src/components/screens/splash";
 
-/* Dark mode needs further studying */
-function App() {
-  const [displayText, setDisplayText] = useState("");
-  const [flag, setFlag] = useState(false);
+// import PlatformAPI from "./src/api/platform";
 
+// function HomeScreen() {
+//   return (
+//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//       <Text>Home Screen</Text>
+//     </View>
+//   );
+// }
+
+const Stack = createNativeStackNavigator();
+
+function RootStack() {
   return (
-    <GluestackUIProvider>
-      <View style={styles.container}>
-        <Button
-          title="Click me"
-          onPress={() => {
-            flag ? setDisplayText("바보") : setDisplayText("최먼지는?");
-            setFlag(curr => !curr);
-          }}
-        />
-        <Text style={styles.text}>{displayText}</Text>
-      </View>
-    </GluestackUIProvider>
+    <Stack.Navigator>
+      <Stack.Screen name="Splash" component={SplashScreen} />
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    alignContent: "center",
-    justifyContent: "center",
-  },
-  text: {
-    justifyContent: "center",
-    alignContent: "center",
-    fontSize: 40,
-  },
-});
+function App() {
+  return (
+    <GluestackUIProvider>
+      <NavigationContainer>
+        <RootStack />
+      </NavigationContainer>
+    </GluestackUIProvider>
+  );
+}
 
 export default App;
