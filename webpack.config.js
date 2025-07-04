@@ -17,7 +17,7 @@ const babelLoaderConfiguration = {
   // Add every directory that needs to be compiled by Babel during the build.
   include: [
       path.resolve(appDirectory, 'index.web.js'), // Entry to your application
-      path.resolve(appDirectory, 'App.tsx'), // Change this to your main App file
+      path.resolve(appDirectory, 'App.tsx'), // Change this to your main App file --> .web.ts files are prioritized
       path.resolve(appDirectory, "components"), // gluestack components
       // path.resolve(appDirectory, 'src'),
       ...compileNodeModules,
