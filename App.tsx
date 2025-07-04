@@ -7,18 +7,17 @@ import { Button, StyleSheet, Text, View } from "react-native";
 function App() {
   const [displayText, setDisplayText] = useState("");
   const [flag, setFlag] = useState(false);
-
+  console.log(GluestackUIProvider)
   return (
     <GluestackUIProvider>
       <View style={styles.container}>
         <Button
-          title="any button"
+          title="Click me"
           onPress={() => {
             flag ? setDisplayText("바보") : setDisplayText("최먼지는?");
             setFlag(curr => !curr);
           }}
         />
-        <Text>Click me</Text>
         <Text style={styles.text}>{displayText}</Text>
       </View>
     </GluestackUIProvider>

@@ -9,3 +9,4 @@ AppRegistry.runApplication(appName, {
   initialProps: {},
   rootTag: document.getElementById('app-root'),
 });
+// web entry point

@@ -16,11 +16,11 @@ const babelLoaderConfiguration = {
   test: /\.[jt]sx?$/,
   // Add every directory that needs to be compiled by Babel during the build.
   include: [
-    path.resolve(appDirectory, 'index.web.js'), // Entry to your application
-    path.resolve(appDirectory, 'App.tsx'), // Change this to your main App file
-    path.resolve(appDirectory, "components"), // gluestack components
-    path.resolve(appDirectory, 'src'),
-    ...compileNodeModules,
+      path.resolve(appDirectory, 'index.web.js'), // Entry to your application
+      path.resolve(appDirectory, 'App.tsx'), // Change this to your main App file
+      path.resolve(appDirectory, "components"), // gluestack components
+      // path.resolve(appDirectory, 'src'),
+      ...compileNodeModules,
   ],
   use: {
     loader: 'babel-loader',
@@ -61,7 +61,7 @@ module.exports = {
     filename: 'rnw_blogpost.bundle.js',
   },
   resolve: {
-    extensions: ['.web.tsx', '.web.ts', '.tsx', '.ts', '.web.js', '.js', '.d.ts'], // added .d.ts for searching
+    extensions: ['.web.tsx', '.web.ts', '.tsx', '.ts', 'web.jsx', '.web.js', ".jsx", '.js', '.d.ts'], // build resolved in this order
     alias: {
       'react-native$': 'react-native-web',
       "@": path.resolve(appDirectory), // resolve alias during building
@@ -90,3 +90,5 @@ module.exports = {
     }),
   ],
 };
+
+/* Web compile manager --> Add configurations and additional babel features */
