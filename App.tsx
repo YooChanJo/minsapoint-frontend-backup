@@ -17,9 +17,8 @@ function App() {
             flag ? setDisplayText("바보") : setDisplayText("최먼지는?");
             setFlag(curr => !curr);
           }}
-        >
-          <Text>Click me</Text>
-        </Button>
+        />
+        <Text>Click me</Text>
         <Text style={styles.text}>{displayText}</Text>
       </View>
     </GluestackUIProvider>

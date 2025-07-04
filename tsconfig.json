@@ -1,6 +1,7 @@
 {
   "extends": "@react-native/typescript-config",
   "compilerOptions": {
+    "lib": ["esnext", "dom"], // react native web
     "paths": {
       "@/*": ["./*"],
       "tailwind.config": ["./tailwind.config.js"]
