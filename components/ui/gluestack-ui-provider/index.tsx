@@ -1,4 +1,4 @@
-import React/* , { useEffect } */ from "react";
+import React /* , { useEffect } */ from "react";
 import { config } from "./config";
 import { View, ViewProps } from "react-native";
 import { OverlayProvider } from "@gluestack-ui/overlay";
@@ -15,7 +15,7 @@ export function GluestackUIProvider({
   children?: React.ReactNode;
   style?: ViewProps["style"];
 }) {
-  const { colorScheme/* , setColorScheme */ } = useColorScheme();
+  const { colorScheme /* , setColorScheme */ } = useColorScheme();
 
   // useEffect(() => {
   //   console.log("Current light/dark sceme: ", colorScheme);

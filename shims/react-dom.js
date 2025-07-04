@@ -5,6 +5,3 @@
 module.exports = {
   flushSync: () => {},
 };
-
-
-

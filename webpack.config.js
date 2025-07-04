@@ -1,33 +1,33 @@
-const path = require('path');
+const path = require("path");
 
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const appDirectory = path.resolve(__dirname);
-const {presets} = require(`${appDirectory}/babel.config.js`);
+const { presets } = require(`${appDirectory}/babel.config.js`);
 
 const compileNodeModules = [
   // Add every react-native package that needs compiling
   "@gluestack-ui",
   "react-native-css-interop",
-].map((moduleName) => path.resolve(appDirectory, `node_modules/${moduleName}`));
+].map(moduleName => path.resolve(appDirectory, `node_modules/${moduleName}`));
 
 const babelLoaderConfiguration = {
   test: /\.[jt]sx?$/,
   // Add every directory that needs to be compiled by Babel during the build.
   include: [
-      path.resolve(appDirectory, 'index.web.js'), // Entry to your application
-      path.resolve(appDirectory, 'App.tsx'), // Change this to your main App file --> .web.ts files are prioritized
-      path.resolve(appDirectory, "components"), // gluestack components
-      // path.resolve(appDirectory, 'src'),
-      ...compileNodeModules,
+    path.resolve(appDirectory, "index.web.js"), // Entry to your application
+    path.resolve(appDirectory, "App.tsx"), // Change this to your main App file --> .web.ts files are prioritized
+    path.resolve(appDirectory, "components"), // gluestack components
+    // path.resolve(appDirectory, 'src'),
+    ...compileNodeModules,
   ],
   use: {
-    loader: 'babel-loader',
+    loader: "babel-loader",
     options: {
       cacheDirectory: true,
       presets,
-      plugins: ['react-native-web'],
+      plugins: ["react-native-web"],
     },
   },
 };
@@ -36,7 +36,7 @@ const svgLoaderConfiguration = {
   test: /\.svg$/,
   use: [
     {
-      loader: '@svgr/webpack',
+      loader: "@svgr/webpack",
     },
   ],
 };
@@ -44,33 +44,40 @@ const svgLoaderConfiguration = {
 const imageLoaderConfiguration = {
   test: /\.(gif|jpe?g|png)$/,
   use: {
-    loader: 'url-loader',
+    loader: "url-loader",
     options: {
-      name: '[name].[ext]',
+      name: "[name].[ext]",
     },
   },
 };
 
 module.exports = {
   entry: {
-    app: path.join(appDirectory, 'index.web.js'),
+    app: path.join(appDirectory, "index.web.js"),
   },
   output: {
-    path: path.resolve(appDirectory, 'dist'),
-    publicPath: '/',
-    filename: 'rnw_blogpost.bundle.js',
+    path: path.resolve(appDirectory, "dist"),
+    publicPath: "/",
+    filename: "rnw_blogpost.bundle.js",
   },
   resolve: {
-    extensions: ['.web.tsx', '.web.ts', '.tsx', '.ts', 'web.jsx', '.web.js', ".jsx", '.js', '.d.ts'], // build resolved in this order
+    extensions: [
+      ".web.tsx",
+      ".web.ts",
+      ".tsx",
+      ".ts",
+      "web.jsx",
+      ".web.js",
+      ".jsx",
+      ".js",
+      ".d.ts",
+    ], // build resolved in this order
     alias: {
-      'react-native$': 'react-native-web',
+      "react-native$": "react-native-web",
       "@": path.resolve(appDirectory), // resolve alias during building
       "tailwind.config": path.resolve(appDirectory, "tailwind.config.js"), // resolve alias during building
     },
-    modules: [
-        path.resolve(appDirectory, "node_modules"),
-        "node_modules"
-    ]
+    modules: [path.resolve(appDirectory, "node_modules"), "node_modules"],
   },
   module: {
     rules: [
@@ -81,7 +88,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(appDirectory, 'index.html'),
+      template: path.join(appDirectory, "index.html"),
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({

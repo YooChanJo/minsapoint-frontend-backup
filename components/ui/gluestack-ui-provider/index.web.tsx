@@ -79,7 +79,7 @@ export function GluestackUIProvider({
       }
     }
   }, []);
-  console.log(ToastProvider, "hi")
+  console.log(ToastProvider, "hi");
   return (
     <>
       <script

@@ -7,7 +7,7 @@ import { Button, StyleSheet, Text, View } from "react-native";
 function App() {
   const [displayText, setDisplayText] = useState("");
   const [flag, setFlag] = useState(false);
-  console.log(GluestackUIProvider)
+
   return (
     <GluestackUIProvider>
       <View style={styles.container}>
