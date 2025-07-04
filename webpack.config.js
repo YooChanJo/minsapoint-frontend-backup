@@ -8,16 +8,18 @@ const {presets} = require(`${appDirectory}/babel.config.js`);
 
 const compileNodeModules = [
   // Add every react-native package that needs compiling
-  // 'react-native-gesture-handler',
+  "@gluestack-ui",
+  "react-native-css-interop",
 ].map((moduleName) => path.resolve(appDirectory, `node_modules/${moduleName}`));
 
 const babelLoaderConfiguration = {
-  test: /\.js$|tsx?$/,
+  test: /\.[jt]sx?$/,
   // Add every directory that needs to be compiled by Babel during the build.
   include: [
-    path.resolve(__dirname, 'index.web.js'), // Entry to your application
-    path.resolve(__dirname, 'App.tsx'), // Change this to your main App file
-    path.resolve(__dirname, 'src'),
+    path.resolve(appDirectory, 'index.web.js'), // Entry to your application
+    path.resolve(appDirectory, 'App.tsx'), // Change this to your main App file
+    path.resolve(appDirectory, "components"), // gluestack components
+    path.resolve(appDirectory, 'src'),
     ...compileNodeModules,
   ],
   use: {
@@ -51,7 +53,7 @@ const imageLoaderConfiguration = {
 
 module.exports = {
   entry: {
-    app: path.join(__dirname, 'index.web.js'),
+    app: path.join(appDirectory, 'index.web.js'),
   },
   output: {
     path: path.resolve(appDirectory, 'dist'),
@@ -59,10 +61,16 @@ module.exports = {
     filename: 'rnw_blogpost.bundle.js',
   },
   resolve: {
-    extensions: ['.web.tsx', '.web.ts', '.tsx', '.ts', '.web.js', '.js'],
+    extensions: ['.web.tsx', '.web.ts', '.tsx', '.ts', '.web.js', '.js', '.d.ts'], // added .d.ts for searching
     alias: {
       'react-native$': 'react-native-web',
+      "@": path.resolve(appDirectory), // resolve alias during building
+      "tailwind.config": path.resolve(appDirectory, "tailwind.config.js"), // resolve alias during building
     },
+    modules: [
+        path.resolve(appDirectory, "node_modules"),
+        "node_modules"
+    ]
   },
   module: {
     rules: [
@@ -73,7 +81,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'index.html'),
+      template: path.join(appDirectory, 'index.html'),
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
