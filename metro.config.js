@@ -9,7 +9,7 @@ const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config");
  * @type {import('@react-native/metro-config').MetroConfig}
  */
 
-/* Resolving for shimmed react dom */
+/* Resolving for shimmed react dom --> only for native codes */
 const config = mergeConfig(getDefaultConfig(__dirname), {
   resolver: {
     extraNodeModules: {
