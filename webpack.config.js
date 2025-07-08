@@ -32,6 +32,7 @@ const babelLoaderConfiguration = {
   },
 };
 
+
 const svgLoaderConfiguration = {
   test: /\.svg$/,
   use: [
@@ -61,6 +62,8 @@ module.exports = {
     filename: "rnw_blogpost.bundle.js",
   },
   resolve: {
+    // mainFields: ["browser", "module", "main"], // unnecessary but forces to chose esm over cjs
+
     extensions: [
       ".web.tsx",
       ".web.ts",
