@@ -8,12 +8,6 @@ import PlatformAPI from "./src/api/platform";
 import NavigationAPI from "./src/api/navigation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-export type RootStackParamList = {
-  Home: undefined;
-  PlatformCheck: { myParam: string };
-  More: undefined;
-};
-
 function HomeScreen() {
   
   const navigation = NavigationAPI.useNavigationWithParamInfo();
@@ -61,11 +55,34 @@ function RootStack() {
   );
 }
 
+export type RootStackParamList = {
+  Home: undefined;
+  PlatformCheck: { myParam: string };
+  More: undefined;
+};
+
+const linking = {
+  prefixes: [ /* Is not needed for web */
+    /* your linking prefixes */
+    'http://10.0.2.2:8081', // When using android emulator
+    'http://192.168.0.42:8081', // When remote connecting --> Needs constant fixing
+    // 'https://xyz.ngrok.io', // deploy
+  ],
+  // filter: (url) => !url.includes('+expo-auth-session'), // for filtering out unwanted paths
+  config: {
+    screens: {
+      Home: "/",
+      PlatformCheck: "/:myParam",
+      More: "/more"
+    }
+  },
+};
+
 function App() {
   return (
     <SafeAreaProvider>
       <GluestackUIProvider>
-        <NavigationContainer>
+        <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
           <RootStack />
         </NavigationContainer>
       </GluestackUIProvider>
