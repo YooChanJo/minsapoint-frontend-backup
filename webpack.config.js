@@ -75,10 +75,10 @@ module.exports = {
     extensions: [
       ".web.tsx",
       ".web.ts",
+      ".web.jsx",
+      ".web.js",
       ".tsx",
       ".ts",
-      "web.jsx",
-      ".web.js",
       ".jsx",
       ".js",
       ".d.ts",
