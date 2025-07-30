@@ -1,33 +1,43 @@
-import { GluestackUIProvider } from "@/src/components/ui/gluestack-ui-provider";
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button, Text, View } from "react-native";
-
 import React from "react";
+import { GluestackUIProvider } from "@/src/components/ui/gluestack-ui-provider";
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Text, View } from "react-native";
+
 import PlatformAPI from "./src/api/platform";
 import NavigationAPI from "./src/api/navigation";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { AppLinking } from "./app-linking";
+import LinkWrapper from "./src/components/link-wrapper";
 
 function HomeScreen() {
-  
-  const navigation = NavigationAPI.useNavigationWithParamInfo();
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('PlatformCheck', { myParam: "Hello World" })} title="Go to Details" />
-      <Button onPress={() => navigation.navigate('More')} title="More Tabs" />
+      <LinkWrapper screen="PlatformCheck" params={{ myParam: "Hello World" }}>
+        Go to Details
+      </LinkWrapper>
+      <LinkWrapper screen='More'>
+        More Tabs
+      </LinkWrapper>
     </View>
   );
 }
 
 function PlatformCheckScreen({ route }: { route: any }) {
-  const navigation = NavigationAPI.useNavigationWithParamInfo();
   const { myParam } = route.params;
+
+  NavigationAPI.useCompatibleEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then(response => response.json())
+      .then(json => console.log(json))
+  }, []);
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Your platform is: {PlatformAPI.getCurrentPlatform()}</Text>
       <Text>My param is: {myParam}</Text>
-      <Button onPress={() => navigation.goBack()} title="Go back" />
+      <LinkWrapper action={StackActions.pop()}>Go Back</LinkWrapper>
     </View>
   )
 }
@@ -55,34 +65,11 @@ function RootStack() {
   );
 }
 
-export type RootStackParamList = {
-  Home: undefined;
-  PlatformCheck: { myParam: string };
-  More: undefined;
-};
-
-const linking = {
-  prefixes: [ /* Is not needed for web */
-    /* your linking prefixes */
-    'http://10.0.2.2:8081', // When using android emulator
-    'http://192.168.0.42:8081', // When remote connecting --> Needs constant fixing
-    // 'https://xyz.ngrok.io', // deploy
-  ],
-  // filter: (url) => !url.includes('+expo-auth-session'), // for filtering out unwanted paths
-  config: {
-    screens: {
-      Home: "/",
-      PlatformCheck: "/:myParam",
-      More: "/more"
-    }
-  },
-};
-
 function App() {
   return (
     <SafeAreaProvider>
       <GluestackUIProvider>
-        <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
+        <NavigationContainer linking={AppLinking} fallback={<Text>Loading...</Text>}>
           <RootStack />
         </NavigationContainer>
       </GluestackUIProvider>
@@ -90,7 +77,24 @@ function App() {
   );
 }
 
+
+
 export default App;
+
+/* Debug App screen */
+// function App() {
+//   NavigationAPI.useCompatibleEffect(() => {
+//     fetch('https://jsonplaceholder.typicode.com/todos/1')
+//       .then(response => response.json())
+//       .then(json => console.log(json))
+//   }, []);
+//   return (
+//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//       <Text>Hello world</Text>
+//     </View>
+//   );
+// }
+
 
 /* Stack Navigator only registers screens --> these are stacked */
 /* 

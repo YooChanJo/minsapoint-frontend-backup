@@ -77,3 +77,4 @@ yarn-error.log
 # custom
 .env
 *.bat
+dist
