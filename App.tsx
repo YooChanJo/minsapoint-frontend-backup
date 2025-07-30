@@ -15,10 +15,14 @@ function HomeScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
       <LinkWrapper screen="PlatformCheck" params={{ myParam: "Hello World" }}>
-        Go to Details
+        <Text>
+          Go to Details
+        </Text>
       </LinkWrapper>
       <LinkWrapper screen='More'>
-        More Tabs
+        <Text>
+          More Tabs
+        </Text>
       </LinkWrapper>
     </View>
   );
@@ -37,7 +41,7 @@ function PlatformCheckScreen({ route }: { route: any }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Your platform is: {PlatformAPI.getCurrentPlatform()}</Text>
       <Text>My param is: {myParam}</Text>
-      <LinkWrapper action={StackActions.pop()}>Go Back</LinkWrapper>
+      <LinkWrapper screen="Home"><Text>Go Back</Text></LinkWrapper>
     </View>
   )
 }
