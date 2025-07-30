@@ -27,7 +27,7 @@ const babelLoaderConfiguration = {
   include: [
     path.resolve(appDirectory, "index.web.js"), // Entry to your application
     path.resolve(appDirectory, "App.tsx"), // Change this to your main App file --> .web.ts files are prioritized
-    path.resolve(appDirectory, 'src'), // all src elements are prebuild
+    path.resolve(appDirectory, "src"), // all src elements are prebuild
     path.resolve(appDirectory, "app-linking.ts"), // the linking structure info of app
     ...compileNodeModules,
   ],
@@ -40,7 +40,6 @@ const babelLoaderConfiguration = {
     },
   },
 };
-
 
 const svgLoaderConfiguration = {
   test: /\.svg$/,
@@ -90,11 +89,31 @@ module.exports = {
     alias: {
       "react-native$": "react-native-web",
       /* React navigation patch --> these do not resolve correctly, since the default of package.json is lib/module, which is not correct */
-      "@react-navigation/core": path.resolve(appDirectory, "node_modules/@react-navigation/core", "src/index.tsx"),
-      "@react-navigation/elements": path.resolve(appDirectory, "node_modules/@react-navigation/elements", "src/index.tsx"),
-      "@react-navigation/native": path.resolve(appDirectory, "node_modules/@react-navigation/native", "src/index.tsx"),
-      "@react-navigation/native-stack": path.resolve(appDirectory, "node_modules/@react-navigation/native-stack", "src/index.tsx"),
-      "@react-navigation/routers": path.resolve(appDirectory, "node_modules/@react-navigation/routers", "src/index.tsx"),
+      "@react-navigation/core": path.resolve(
+        appDirectory,
+        "node_modules/@react-navigation/core",
+        "src/index.tsx"
+      ),
+      "@react-navigation/elements": path.resolve(
+        appDirectory,
+        "node_modules/@react-navigation/elements",
+        "src/index.tsx"
+      ),
+      "@react-navigation/native": path.resolve(
+        appDirectory,
+        "node_modules/@react-navigation/native",
+        "src/index.tsx"
+      ),
+      "@react-navigation/native-stack": path.resolve(
+        appDirectory,
+        "node_modules/@react-navigation/native-stack",
+        "src/index.tsx"
+      ),
+      "@react-navigation/routers": path.resolve(
+        appDirectory,
+        "node_modules/@react-navigation/routers",
+        "src/index.tsx"
+      ),
       /************************************************************/
       "@": path.resolve(appDirectory), // resolve alias during building
       "tailwind.config": path.resolve(appDirectory, "tailwind.config.js"), // resolve alias during building

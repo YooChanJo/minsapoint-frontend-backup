@@ -10,8 +10,8 @@ export const AppLinking = {
   /* Is not needed for web */
   prefixes: [
     /* your linking prefixes */
-    'http://10.0.2.2:8081', // When using android emulator
-    'http://192.168.0.42:8081', // When remote connecting --> Needs constant fixing
+    "http://10.0.2.2:8081", // When using android emulator
+    "http://192.168.0.42:8081", // When remote connecting --> Needs constant fixing
     // 'https://xyz.ngrok.io', // deploy
   ],
   // filter: (url) => !url.includes('+expo-auth-session'), // for filtering out unwanted paths
@@ -22,9 +22,9 @@ export const AppLinking = {
       More: {
         screens: {
           Feed: "/more/feed",
-          Messages: "/more"
-        }
-      }
-    }
+          Messages: "/more",
+        },
+      },
+    },
   },
 };
