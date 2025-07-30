@@ -41,7 +41,7 @@ function PlatformCheckScreen({ route }: { route: any }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Your platform is: {PlatformAPI.getCurrentPlatform()}</Text>
       <Text>My param is: {myParam}</Text>
-      <LinkWrapper screen="Home"><Text>Go Back</Text></LinkWrapper>
+      <LinkWrapper screen="Home" action={StackActions.popTo("Home")}><Text>Go Back</Text></LinkWrapper>
     </View>
   )
 }

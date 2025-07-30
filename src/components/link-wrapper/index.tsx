@@ -11,6 +11,7 @@ type LinkButtonProps = {
   children?: ReactNode;
 } & PressableProps;
 
+/* Actions would be normally ignored or malfunctioned with web use */
 export default function LinkWrapper({ screen="", params={}, action, href, children, ...rest }: LinkButtonProps) {
   const props = useLinkProps({ screen, params, action, href });
 
