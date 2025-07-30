@@ -65,7 +65,11 @@ module.exports = {
   entry: {
     app: path.join(appDirectory, "index.web.js"),
   },
-
+  /* devServer is to match links to fallback to index.html for unknown requests --> when deploying this should be configured in deployment MUST */
+  /* This configuration is only for dev --> Deploying requires additional attention */
+  devServer: {
+    historyApiFallback: true,
+  },
   output: {
     path: path.resolve(appDirectory, "dist"),
     publicPath: "/",
