@@ -4,6 +4,7 @@ export type RootStackParamList = {
   Home: undefined;
   PlatformCheck: { myParam: string };
   More: undefined;
+  NotFound: undefined;
 };
 
 export const AppLinking: LinkingOptions<RootStackParamList> = {
