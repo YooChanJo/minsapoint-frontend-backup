@@ -1,12 +1,12 @@
-// this contains app structure to block double imports
+import { getStateFromPath, LinkingOptions } from "@react-navigation/native";
 
-// export type RootStackParamList = {
-//   Home: undefined;
-//   PlatformCheck: { myParam: string };
-//   More: undefined;
-// };
+export type RootStackParamList = {
+  Home: undefined;
+  PlatformCheck: { myParam: string };
+  More: undefined;
+};
 
-export const AppLinking = {
+export const AppLinking: LinkingOptions<RootStackParamList> = {
   /* Is not needed for web */
   prefixes: [
     /* your linking prefixes */
@@ -26,5 +26,15 @@ export const AppLinking = {
         },
       },
     },
+  },
+  /* Unknown path handling */
+  getStateFromPath: (path, options) => {
+    const state = getStateFromPath(path, options);
+    if (!state) {
+      return {
+        routes: [{ name: 'NotFound' }],
+      };
+    }
+    return state;
   },
 };

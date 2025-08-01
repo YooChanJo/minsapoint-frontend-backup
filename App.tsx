@@ -9,6 +9,7 @@ import PlatformAPI from "./src/api/platform";
 import NavigationAPI from "./src/api/navigation";
 import { AppLinking } from "./app-linking";
 import LinkWrapper from "./src/components/link-wrapper";
+import NotFound from "./src/screens/not-found";
 
 function HomeScreen() {
   return (
@@ -83,6 +84,10 @@ function RootStack() {
         name="More"
         component={MoreTabs}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NotFound"
+        component={NotFound}
       />
     </Stack.Navigator>
   );
