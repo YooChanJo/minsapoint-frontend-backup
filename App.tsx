@@ -5,10 +5,17 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Text, View } from "react-native";
 
+/* Configurations */
+import { AppLinking } from "./src/config/deep-linking";
+
+/* Apis */
 import PlatformAPI from "./src/api/platform";
 import NavigationAPI from "./src/api/navigation";
-import { AppLinking } from "./app-linking";
+
+/* Components */
 import LinkWrapper from "./src/components/link-wrapper";
+
+/* Screens */
 import NotFound from "./src/screens/not-found";
 
 function HomeScreen() {
