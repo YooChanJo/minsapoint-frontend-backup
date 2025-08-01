@@ -1,7 +1,4 @@
-package com.backupapp
-
-/* React Navigation */
-import android.os.Bundle;
+package com.minsapoint
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
@@ -10,16 +7,11 @@ import com.facebook.react.defaults.DefaultReactActivityDelegate
 
 class MainActivity : ReactActivity() {
 
-  /* React navigation */
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(null)
-  }
-
   /**
    * Returns the name of the main component registered from JavaScript. This is used to schedule
    * rendering of the component.
    */
-  override fun getMainComponentName(): String = "BackupApp"
+  override fun getMainComponentName(): String = "Minsapoint"
 
   /**
    * Returns the instance of the [ReactActivityDelegate]. We use [DefaultReactActivityDelegate]

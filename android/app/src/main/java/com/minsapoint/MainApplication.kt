@@ -1,4 +1,4 @@
-package com.backupapp
+package com.minsapoint
 
 import android.app.Application
 import com.facebook.react.PackageList
