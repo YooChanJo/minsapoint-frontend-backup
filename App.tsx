@@ -117,6 +117,13 @@ function App() {
 
 export default App;
 
+/* 
+  TODO for deployment
+  Add new SHA-1 signing for google auth of firebase ---> deploy
+*/
+
+
+
 /* Debug App screen */
 // function App() {
 //   NavigationAPI.useCompatibleEffect(() => {
