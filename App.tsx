@@ -17,17 +17,25 @@ import LinkWrapper from "./src/components/link-wrapper";
 
 /* Screens */
 import NotFound from "./src/screens/not-found";
+import { AuthProvider, useAuth } from "./src/components/auth-provider";
 
 function HomeScreen() {
+  const authValue = useAuth();
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home Screen</Text>
-      <LinkWrapper screen="PlatformCheck" params={{ myParam: "Hello World" }}>
-        <Text>Go to Details</Text>
-      </LinkWrapper>
-      <LinkWrapper screen="More">
-        <Text>More Tabs</Text>
-      </LinkWrapper>
+      <Text>Welcome to Home Screen</Text>
+      <View style={{borderWidth: 1, padding: 20, margin: 10}}>
+        <Text>User Logged In: {String(authValue.userLoggedIn)}</Text>
+        <Text>AccessToken: {authValue.accessToken}</Text>
+      </View>
+      <View style={{borderWidth: 1, padding: 20, margin: 10}}>
+        <LinkWrapper screen="PlatformCheck" params={{ myParam: "Hello World" }}>
+          <Text style={{color: "blue"}}>Go to PlatformCheck</Text>
+        </LinkWrapper>
+        <LinkWrapper screen="More">
+          <Text style={{color: "blue"}}>More Tabs</Text>
+        </LinkWrapper>
+      </View>
     </View>
   );
 }
@@ -59,16 +67,28 @@ function MoreTabs() {
       <Tab.Screen
         name="Feed"
         component={() => (
-          <View>
+          <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
             <Text>Feed</Text>
+            <LinkWrapper screen="Messages" action={StackActions.popTo("Messages")}>
+              <Text>Go to Messages</Text>
+            </LinkWrapper>
+            <LinkWrapper screen="Home" action={StackActions.popTo("Home")}>
+              <Text>Go Back</Text>
+            </LinkWrapper>
           </View>
         )}
       />
       <Tab.Screen
         name="Messages"
         component={() => (
-          <View>
+          <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
             <Text>Messages</Text>
+            <LinkWrapper screen="Feed" action={StackActions.popTo("Feed")}>
+              <Text>Go to Feed</Text>
+            </LinkWrapper>
+            <LinkWrapper screen="Home" action={StackActions.popTo("Home")}>
+              <Text>Go Back</Text>
+            </LinkWrapper>
           </View>
         )}
       />
@@ -92,10 +112,7 @@ function RootStack() {
         component={MoreTabs}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="NotFound"
-        component={NotFound}
-      />
+      <Stack.Screen name="NotFound" component={NotFound} />
     </Stack.Navigator>
   );
 }
@@ -103,14 +120,16 @@ function RootStack() {
 function App() {
   return (
     <SafeAreaProvider>
-      <GluestackUIProvider>
-        <NavigationContainer
-          linking={AppLinking}
-          fallback={<Text>Loading...</Text>}
-        >
-          <RootStack />
-        </NavigationContainer>
-      </GluestackUIProvider>
+        <GluestackUIProvider>
+          <NavigationContainer
+            linking={AppLinking}
+            fallback={<Text>Loading...</Text>}
+          >
+            <AuthProvider>
+              <RootStack />
+            </AuthProvider>
+          </NavigationContainer>
+        </GluestackUIProvider>
     </SafeAreaProvider>
   );
 }
@@ -121,8 +140,6 @@ export default App;
   TODO for deployment
   Add new SHA-1 signing for google auth of firebase ---> deploy
 */
-
-
 
 /* Debug App screen */
 // function App() {

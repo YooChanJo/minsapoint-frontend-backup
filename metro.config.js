@@ -21,4 +21,4 @@ const config = mergeConfig(getDefaultConfig(__dirname), {
 module.exports = withNativeWind(config, {
   input: "./global.css",
 });
-// this is app only --> Metro bundler
+// this is mobile only --> Metro bundler

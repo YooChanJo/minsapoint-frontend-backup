@@ -33,7 +33,7 @@ export const AppLinking: LinkingOptions<RootStackParamList> = {
     const state = getStateFromPath(path, options);
     if (!state) {
       return {
-        routes: [{ name: 'NotFound' }],
+        routes: [{ name: "NotFound" }],
       };
     }
     return state;
