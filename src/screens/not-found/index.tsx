@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-export default function NotFound() {
+export default function NotFoundScreen() {
   return (
     <View>
       <Text>Not Found: Invalid route</Text>

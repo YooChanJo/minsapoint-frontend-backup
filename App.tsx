@@ -16,24 +16,27 @@ import NavigationAPI from "./src/api/navigation";
 import LinkWrapper from "./src/components/link-wrapper";
 
 /* Screens */
-import NotFound from "./src/screens/not-found";
 import { AuthProvider, useAuth } from "./src/components/auth-provider";
+import NotFoundScreen from "./src/screens/not-found";
+import LoginScreen from "./src/screens/login";
 
 function HomeScreen() {
   const authValue = useAuth();
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Welcome to Home Screen</Text>
-      <View style={{borderWidth: 1, padding: 20, margin: 10}}>
+      <View style={{ borderWidth: 1, padding: 20, margin: 10 }}>
         <Text>User Logged In: {String(authValue.userLoggedIn)}</Text>
         <Text>AccessToken: {authValue.accessToken}</Text>
       </View>
-      <View style={{borderWidth: 1, padding: 20, margin: 10}}>
-        <LinkWrapper screen="PlatformCheck" params={{ myParam: "Hello World" }}>
-          <Text style={{color: "blue"}}>Go to PlatformCheck</Text>
+      <View style={{ borderWidth: 1, padding: 20, margin: 10 }}>
+        <LinkWrapper screen="Login">
+          <Text style={{ color: "blue" }}>Go to Login screen</Text>
         </LinkWrapper>
-        <LinkWrapper screen="More">
-          <Text style={{color: "blue"}}>More Tabs</Text>
+      </View>
+      <View style={{ borderWidth: 1, padding: 20, margin: 10 }}>
+        <LinkWrapper screen="PlatformCheck" params={{ myParam: "Hello World" }}>
+          <Text style={{ color: "blue" }}>Go to PlatformCheck</Text>
         </LinkWrapper>
       </View>
     </View>
@@ -60,46 +63,10 @@ function PlatformCheckScreen({ route }: { route: any }) {
   );
 }
 
-const Tab = createNativeStackNavigator();
-function MoreTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Feed"
-        component={() => (
-          <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-            <Text>Feed</Text>
-            <LinkWrapper screen="Messages" action={StackActions.popTo("Messages")}>
-              <Text>Go to Messages</Text>
-            </LinkWrapper>
-            <LinkWrapper screen="Home" action={StackActions.popTo("Home")}>
-              <Text>Go Back</Text>
-            </LinkWrapper>
-          </View>
-        )}
-      />
-      <Tab.Screen
-        name="Messages"
-        component={() => (
-          <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-            <Text>Messages</Text>
-            <LinkWrapper screen="Feed" action={StackActions.popTo("Feed")}>
-              <Text>Go to Feed</Text>
-            </LinkWrapper>
-            <LinkWrapper screen="Home" action={StackActions.popTo("Home")}>
-              <Text>Go Back</Text>
-            </LinkWrapper>
-          </View>
-        )}
-      />
-    </Tab.Navigator>
-  );
-}
-
 const Stack = createNativeStackNavigator();
-
 function RootStack() {
   return (
+    /* Debug screens */
     <Stack.Navigator>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen
@@ -107,12 +74,9 @@ function RootStack() {
         component={PlatformCheckScreen}
         initialParams={{ myParam: "My Param" }}
       />
-      <Stack.Screen
-        name="More"
-        component={MoreTabs}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen name="NotFound" component={NotFound} />
+      
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="NotFound" component={NotFoundScreen} />
     </Stack.Navigator>
   );
 }
@@ -120,16 +84,16 @@ function RootStack() {
 function App() {
   return (
     <SafeAreaProvider>
-        <GluestackUIProvider>
-          <NavigationContainer
-            linking={AppLinking}
-            fallback={<Text>Loading...</Text>}
-          >
-            <AuthProvider>
-              <RootStack />
-            </AuthProvider>
-          </NavigationContainer>
-        </GluestackUIProvider>
+      <GluestackUIProvider>
+        <NavigationContainer
+          linking={AppLinking}
+          fallback={<Text>Loading...</Text>}
+        >
+          <AuthProvider>
+            <RootStack />
+          </AuthProvider>
+        </NavigationContainer>
+      </GluestackUIProvider>
     </SafeAreaProvider>
   );
 }
@@ -186,3 +150,42 @@ export default App;
   </Stack.Navigator>
 */
 /* Navigation Ref for using navigation feature where useNavigation is not available */
+
+// function Feed() {
+//   return (
+//     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+//       <Text>Feed</Text>
+//       <LinkWrapper screen="Messages" action={StackActions.popTo("Messages")}>
+//         <Text>Go to Messages</Text>
+//       </LinkWrapper>
+//       <LinkWrapper screen="Home" action={StackActions.popTo("Home")}>
+//         <Text>Go Back</Text>
+//       </LinkWrapper>
+//     </View>
+//   );
+// }
+
+// function Messages() {
+//   return (
+//     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+//       <Text>Messages</Text>
+//       <LinkWrapper screen="Feed" action={StackActions.popTo("Feed")}>
+//         <Text>Go to Feed</Text>
+//       </LinkWrapper>
+//       <LinkWrapper screen="Home" action={StackActions.popTo("Home")}>
+//         <Text>Go Back</Text>
+//       </LinkWrapper>
+//     </View>
+//   );
+// }
+
+// const Tab = createNativeStackNavigator();
+// function MoreTabs() {
+//   return (
+//     <Tab.Navigator>
+//       <Tab.Screen name="Feed" component={Feed} />
+//       <Tab.Screen name="Messages" component={Messages} />
+//     </Tab.Navigator>
+//   );
+// }
+

@@ -1,10 +1,12 @@
 import { getStateFromPath, LinkingOptions } from "@react-navigation/native";
 
 export type RootStackParamList = {
+  Login: undefined;
+  NotFound: undefined;
+
+  /* Debug screens */
   Home: undefined;
   PlatformCheck: { myParam: string };
-  More: undefined;
-  NotFound: undefined;
 };
 
 export const AppLinking: LinkingOptions<RootStackParamList> = {
@@ -18,14 +20,11 @@ export const AppLinking: LinkingOptions<RootStackParamList> = {
   // filter: (url) => !url.includes('+expo-auth-session'), // for filtering out unwanted paths
   config: {
     screens: {
+      Login: "/login",
+
+      /* Debug screens */
       Home: "/",
       PlatformCheck: "/platform-check/:myParam",
-      More: {
-        screens: {
-          Feed: "/more/feed",
-          Messages: "/more",
-        },
-      },
     },
   },
   /* Unknown path handling */
