@@ -14,9 +14,11 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@gluestack-style/react": "^1.0.57",
     "@gluestack-ui/icon": "^0.1.27",
     "@gluestack-ui/nativewind-utils": "^1.0.26",
     "@gluestack-ui/overlay": "^0.1.22",
+    "@gluestack-ui/themed": "^1.1.73",
     "@gluestack-ui/toast": "^1.0.9",
     "@react-native-firebase/app": "^22.4.0",
     "@react-native-firebase/auth": "^22.4.0",

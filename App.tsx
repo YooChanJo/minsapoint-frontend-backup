@@ -74,13 +74,14 @@ function RootStack() {
         component={PlatformCheckScreen}
         initialParams={{ myParam: "My Param" }}
       />
-      
+
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} />
     </Stack.Navigator>
   );
 }
 
+/* Manually toggling all of light mode, but would want to use both light & dark mode */
 function App() {
   return (
     <SafeAreaProvider>
@@ -188,4 +189,3 @@ export default App;
 //     </Tab.Navigator>
 //   );
 // }
-
